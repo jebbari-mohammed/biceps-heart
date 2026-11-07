@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Biceps Heart Protocol — 100/100</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* UI/UX Pro Max — Warm Editorial & High-Craft Light Tokens */
+      --bg-canvas: #F6F3EC;
+      --bg-surface: #FFFFFF;
+      --bg-recessed: #EDE8DF;
+      --ink-primary: #141413;
+      --ink-secondary: #52504C;
+      --ink-muted: #858078;
+      --border-hairline: #DFD9CE;
+      --border-strong: #141413;
+
+      --accent-crimson: #E11D48;
+      --accent-crimson-hover: #BE123C;
+      --accent-crimson-soft: #FFE4E9;
+      --accent-amber: #D97706;
+
+      --skin-base: #EAC0A6;
+      --skin-shadow: #D59F82;
+      --skin-deep: #B97D60;
+      --skin-line: #6E4230;
+
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+
+      --shadow-card: 0 1px 2px rgba(20, 20, 19, 0.04), 0 12px 32px -8px rgba(20, 20, 19, 0.07);
+      --shadow-tactile: 0 3px 0 #141413;
+      --shadow-tactile-active: 0 0px 0 #141413;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100dvh;
+      background-color: var(--bg-canvas);
+      background-image: radial-gradient(rgba(20, 20, 19, 0.055) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--ink-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 64px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation / Telemetry Header */
+    .topbar {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-secondary);
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-crimson);
+      display: inline-block;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 150ms ease, border-color 150ms ease;
+    }
+
+    .icon-btn:hover {
+      background: var(--bg-recessed);
+      border-color: var(--ink-muted);
+    }
+
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Main Layout Container */
+    .container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Editorial Hero Header */
+    .hero-header {
+      text-align: left;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-crimson);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Calistoga', Georgia, serif;
+      font-size: clamp(1.85rem, 5.5vw, 2.35rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: var(--ink-primary);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--ink-secondary);
+      line-height: 1.55;
+    }
+
+    /* Main Interactive Workbench Card */
+    .workbench-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: border-color 250ms ease;
+    }
+
+    /* Meter Header Bar */
+    .meter-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #FCFBF9;
+    }
+
+    .meter-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .meter-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-secondary);
+    }
+
+    .meter-readout {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .meter-readout .highlight {
+      color: var(--accent-crimson);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--bg-recessed);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--ink-primary);
+      border-radius: 999px;
+      transition: width 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms ease;
+    }
+
+    .workbench-card.is-complete .progress-fill {
+      background: var(--accent-crimson);
+    }
+
+    /* SVG Anatomical Biceps Heart Viewport */
+    .viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 500 / 430;
+      background:
+        linear-gradient(to right, rgba(20, 20, 19, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20, 20, 19, 0.03) 1px, transparent 1px),
+        #FAF8F4;
+      background-size: 25px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .viewport-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Floating Telemetry Tag inside Viewport */
+    .viewport-badge {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-hairline);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      pointer-events: none;
+    }
+
+    /* Negative Space Heart Pulse when 100/100 */
+    .negative-space-heart {
+      opacity: 0;
+      transition: opacity 400ms ease;
+      transform-origin: 245px 235px;
+    }
+
+    .workbench-card.is-complete .negative-space-heart {
+      opacity: 1;
+      animation: subtlePulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes subtlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    /* Live Commentary Strip */
+    .commentary-strip {
+      padding: 13px 20px;
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
+      background: #FCFBF9;
+      font-size: 0.875rem;
+      color: var(--ink-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 48px;
+    }
+
+    /* Two-Button Control Deck (Like +1/100 and I Love You +15/100) */
+    .controls-deck {
+      padding: 18px 20px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 12px;
+      background: var(--bg-surface);
+    }
+
+    .action-btn {
+      appearance: none;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 14px 14px;
+      min-height: 56px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.94rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      box-shadow: var(--shadow-tactile);
+      transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease;
+      user-select: none;
+    }
+
+    .action-btn:active {
+      transform: translateY(3px);
+      box-shadow: var(--shadow-tactile-active);
+    }
+
+    .action-btn:focus-visible {
+      outline: 2px solid var(--accent-crimson);
+      outline-offset: 2px;
+    }
+
+    .btn-left-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+    }
+
+    /* Secondary Button: Like (+1/100) */
+    .btn-like {
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+    }
+
+    .btn-like:hover {
+      background: var(--bg-recessed);
+    }
+
+    .btn-like .pts-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: var(--bg-recessed);
+      color: var(--ink-secondary);
+      border: 1px solid var(--border-hairline);
+    }
+
+    /* Primary Button: I Love You (+15/100) */
+    .btn-love {
+      background: var(--accent-crimson);
+      color: #FFFFFF;
+    }
+
+    .btn-love:hover {
+      background: var(--accent-crimson-hover);
+    }
+
+    .btn-love .pts-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: rgba(20, 20, 19, 0.22);
+      color: #FFFFFF;
+    }
+
+    /* Floating score delta chip on tap */
+    .score-floater {
+      position: fixed;
+      pointer-events: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      animation: riseAndFade 750ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .score-floater.love-variant {
+      background: var(--accent-crimson);
+      color: #FFFFFF;
+    }
+
+    @keyframes riseAndFade {
+      0% { opacity: 1; transform: translateY(0) scale(0.92); }
+      100% { opacity: 0; transform: translateY(-44px) scale(1); }
+    }
+
+    /* Darija Letter Section (Revealed at 100/100, or previewable) */
+    .letter-section {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 400ms ease, transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .letter-section.is-visible {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 24px 22px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+
+    .letter-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border-hairline);
+      flex-wrap: wrap;
+    }
+
+    .letter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-crimson);
+      background: var(--accent-crimson-soft);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Script Switcher (Darija Latin vs Arabic Script) */
+    .script-switch {
+      display: inline-flex;
+      background: var(--bg-recessed);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--border-hairline);
+    }
+
+    .script-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .script-btn.active {
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    .letter-heading {
+      font-family: 'Calistoga', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--ink-primary);
+      margin-bottom: 14px;
+    }
+
+    .letter-content {
+      font-size: 0.96rem;
+      line-height: 1.72;
+      color: var(--ink-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .letter-content[dir="rtl"] {
+      font-family: 'Readex Pro', sans-serif;
+      font-size: 1.02rem;
+      line-height: 1.85;
+    }
+
+    .letter-heading[dir="rtl"] {
+      font-family: 'Readex Pro', sans-serif;
+      font-weight: 600;
+    }
+
+    .letter-footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink-primary);
+      font-weight: 600;
+    }
+
+    .reset-link {
+      appearance: none;
+      border: none;
+      background: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .reset-link:hover {
+      color: var(--ink-primary);
+    }
+
+    @media (max-width: 420px) {
+      .controls-deck {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Telemetry Header -->
+  <header class="topbar">
+    <div class="brand-tag">
+      <span class="status-indicator"></span>
+      <span>BICEPS-HEART // BUILD v2.0</span>
+    </div>
+    <button class="icon-btn" id="soundToggle" type="button" aria-label="Toggle sound effects" title="Toggle sound">
+      <svg id="soundIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+      </svg>
+      <svg id="soundIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+    </button>
+  </header>
+
+  <main class="container">
+    <!-- Editorial Intro -->
+    <section class="hero-header">
+      <span class="eyebrow" style="margin-bottom: 0;">For Chochita</span>
+    </section>
+
+    <!-- Interactive Workbench Card -->
+    <section class="workbench-card" id="workbenchCard">
+      <div class="meter-header">
+        <div class="meter-labels">
+          <span class="meter-status" id="statusLabel">BICEP CURVATURE: DEFICIT</span>
+          <span class="meter-readout"><span class="highlight" id="scoreValue">0</span> / 100</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Anatomical Biceps-Heart Pose Viewport (Matches the reference pose!) -->
+      <div class="viewport" id="viewportArea">
+        <div class="viewport-badge" id="viewportBadge">HEART GAP: INCOMPLETE</div>
+
+        <svg class="viewport-svg" viewBox="0 0 500 430" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flexed arm and hands forming a biceps heart in negative space">
+          <defs>
+            <linearGradient id="armGrad" x1="120" y1="120" x2="420" y2="410" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F2CBB4" />
+              <stop offset="55%" stop-color="#E4B093" />
+              <stop offset="100%" stop-color="#CFA48A" />
+            </linearGradient>
+            <linearGradient id="handLeftGrad" x1="30" y1="80" x2="240" y2="230" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#E8B89D" />
+              <stop offset="100%" stop-color="#F4D1BC" />
+            </linearGradient>
+            <linearGradient id="heartFillGrad" x1="240" y1="95" x2="255" y2="330" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#E11D48" stop-opacity="0.22" />
+              <stop offset="100%" stop-color="#E11D48" stop-opacity="0.06" />
+            </linearGradient>
+          </defs>
+
+          <!-- Dashed Target Heart Contour in the Negative Space (Shows where the bicep needs to reach!) -->
+          <path
+            id="targetHeartOutline"
+            d="M 244 156
+               C 225 108, 138 106, 118 168
+               C 102 218, 165 268, 282 326
+               C 328 258, 372 192, 356 140
+               C 340 94, 265 106, 244 156 Z"
+            stroke="#E11D48"
+            stroke-width="1.75"
+            stroke-dasharray="5 5"
+            stroke-opacity="0.55"
+            fill="none"
+          />
+
+          <!-- Glowing Crimson Heart in the Negative Space (Reveals as bicep reaches 100/100) -->
+          <g class="negative-space-heart" id="negativeSpaceHeart">
+            <path
+              d="M 244 156
+                 C 225 108, 138 106, 118 168
+                 C 102 218, 168 266, 282 326
+                 C 328 258, 372 192, 356 140
+                 C 340 94, 265 106, 244 156 Z"
+              fill="url(#heartFillGrad)"
+              stroke="#E11D48"
+              stroke-width="2.5"
+            />
+          </g>
+
+          <!-- ============================================================ -->
+          <!-- 1. FLEXED RIGHT ARM + RIGHT HAND (Enters from bottom-left,   -->
+          <!--    bicep bulges in lower-left, elbow at bottom-right,        -->
+          <!--    forearm rises on right, right hand arches over top-right) -->
+          <!-- ============================================================ -->
+          <path
+            id="rightArmBody"
+            fill="url(#armGrad)"
+            stroke="#5C3626"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d=""
+          />
+
+          <!-- Subtle anatomical shading on inner elbow & bicep contour -->
+          <path
+            id="bicepContourShadow"
+            stroke="#B97D60"
+            stroke-width="2"
+            stroke-linecap="round"
+            fill="none"
+            opacity="0.5"
+            d=""
+          />
+
+          <!-- Small beauty mark / mole on inner forearm (just like the reference photo!) -->
+          <circle cx="378" cy="246" r="2.3" fill="#6B4230" opacity="0.75" />
+
+          <!-- Silver Chain Bracelet on the Right Wrist (from reference photo!) -->
+          <g id="wristBracelet">
+            <path
+              d="M 366 132 C 398 118, 428 104, 456 94"
+              stroke="#475569"
+              stroke-width="5.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 366 132 C 398 118, 428 104, 456 94"
+              stroke="#F8FAFC"
+              stroke-width="3"
+              stroke-dasharray="5 4"
+              stroke-linecap="round"
+            />
+          </g>
+
+          <!-- Finger detail lines on Right Hand (top-right arch) -->
+          <path
+            d="M 326 42 C 292 68, 268 112, 250 156
+               M 340 58 C 306 82, 282 120, 262 158"
+            stroke="#8A5640"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            fill="none"
+          />
+
+          <!-- ============================================================ -->
+          <!-- 2. LEFT HAND (Enters from upper-left, thumb presses down     -->
+          <!--    onto the top-left of the bicep, fingers arch over         -->
+          <!--    top-left to meet the right hand's fingertips at center!)  -->
+          <!-- ============================================================ -->
+          <path
+            id="leftHandBody"
+            fill="url(#handLeftGrad)"
+            stroke="#5C3626"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M -10 112
+               C 45 104, 115 92, 178 78
+               C 198 74, 224 106, 242 152
+               C 245 160, 236 165, 229 157
+               C 212 124, 192 106, 174 110
+               C 142 118, 114 140, 110 176
+               C 106 205, 118 225, 104 252
+               C 96 266, 82 264, 80 248
+               C 78 224, 62 200, 35 194
+               C 15 190, -2 195, -10 198
+               Z"
+          />
+
+          <!-- Left Hand finger crease lines -->
+          <path
+            d="M 164 82 C 190 82, 215 112, 234 155
+               M 78 168 C 94 176, 104 192, 102 214"
+            stroke="#8A5640"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            fill="none"
+          />
+
+          <!-- Bicep Peak Measurement Arrow (Shows the bicep rising up to meet the thumb!) -->
+          <g id="bicepMeasureIndicator">
+            <line id="measureLine" x1="195" y1="220" x2="195" y2="330" stroke="#E11D48" stroke-width="1.5" stroke-dasharray="3 3" />
+            <circle id="measureDot" cx="195" cy="330" r="4" fill="#E11D48" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Live Commentary Strip -->
+      <div class="commentary-strip">
+        <span id="commentaryText">Bicep is currently too flat to form the bottom-left of the heart.</span>
+      </div>
+
+      <!-- Two-Button Deck: Like (+1/100) & I Love You (+15/100) -->
+      <div class="controls-deck">
+        <button class="action-btn btn-like" id="likeBtn" type="button">
+          <span class="btn-left-group">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span>Like</span>
+          </span>
+          <span class="pts-pill">+1/100</span>
+        </button>
+
+        <button class="action-btn btn-love" id="loveBtn" type="button">
+          <span class="btn-left-group">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>I Love You</span>
+          </span>
+          <span class="pts-pill">+15/100</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Unlocked Darija Letter Card -->
+    <section class="letter-section" id="letterSection" aria-live="polite">
+      <article class="letter-card">
+        <div class="letter-card-header">
+          <span class="letter-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>100/100 BICEPS HEART UNLOCKED</span>
+          </span>
+        </div>
+
+        <h2 class="letter-heading" id="letterHeading">Chochita,</h2>
+        <div class="letter-content" id="letterContent">
+          <p>Bghit ghir ngolik raki a7ssan bent eraftha f hyati kamla. Chokran 3la d7k w 3la ga3 lawqat zwinin li dowezna. Wakha ma3ndich biceps kbar, 3ndi qalb dima kaytmnna lik ghir lkhir w d7ka matfarkch wejhek.</p>
+        </div>
+
+        <div class="letter-footer">
+          <span>100 / 100</span>
+          <button class="reset-link" id="resetBtn" type="button">Reset (0/100)</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    // =========================================================================
+    // STATE & DOM ELEMENTS
+    // =========================================================================
+    let score = 0;
+    const MAX_SCORE = 100;
+    let soundEnabled = true;
+
+    const workbenchCard = document.getElementById("workbenchCard");
+    const statusLabel = document.getElementById("statusLabel");
+    const scoreValue = document.getElementById("scoreValue");
+    const progressBar = document.getElementById("progressBar");
+    const progressFill = document.getElementById("progressFill");
+    const viewportBadge = document.getElementById("viewportBadge");
+    const commentaryText = document.getElementById("commentaryText");
+    const rightArmBody = document.getElementById("rightArmBody");
+    const bicepContourShadow = document.getElementById("bicepContourShadow");
+    const targetHeartOutline = document.getElementById("targetHeartOutline");
+    const bicepMeasureIndicator = document.getElementById("bicepMeasureIndicator");
+    const measureLine = document.getElementById("measureLine");
+    const measureDot = document.getElementById("measureDot");
+
+    const likeBtn = document.getElementById("likeBtn");
+    const loveBtn = document.getElementById("loveBtn");
+    const letterSection = document.getElementById("letterSection");
+    const resetBtn = document.getElementById("resetBtn");
+    const soundToggle = document.getElementById("soundToggle");
+    const soundIconOn = document.getElementById("soundIconOn");
+    const soundIconOff = document.getElementById("soundIconOff");
+
+    // =========================================================================
+    // ANATOMICAL BICEPS HEART GEOMETRY (Matches the reference photo!)
+    // =========================================================================
+    // In the reference photo:
+    // - The top of the heart is formed by the left hand (top-left) and right hand (top-right) meeting at (244, 156).
+    // - The bottom-right wall of the heart is the inner forearm from wrist (362, 134) down to inner elbow crease (282, 326).
+    // - The bottom-left wall of the heart is the BICEP from inner elbow (282, 326) up to the left thumb (96, 250).
+    // When t = 0 (0/100): the bicep is skinny/sunken (droops down to y=355), so the negative space does NOT form a heart.
+    // When t = 1 (100/100): the bicep swells up and right along the exact lower-left heart curve!
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function updateBicepGeometry(rawProgress) {
+      const t = Math.max(0, Math.min(1, rawProgress));
+      // Smooth ease-out for natural muscle inflation
+      const m = 1 - Math.pow(1 - t, 1.6);
+
+      // Bicep control points between left thumb (96, 250) and inner elbow crease (282, 326):
+      // At m=0 (skinny arm): dips way down to (150, 355) & (230, 365)
+      // At m=1 (full biceps heart): rises up to (115, 222) & (185, 272) to form a crisp heart wall!
+      const cp1X = lerp(138, 108, m);
+      const cp1Y = lerp(358, 218, m);
+
+      const cp2X = lerp(225, 182, m);
+      const cp2Y = lerp(368, 272, m);
+
+      // Where the left thumb touches the top of the bicep
+      const bicepLeftStartX = lerp(82, 96, m);
+      const bicepLeftStartY = lerp(322, 246, m);
+
+      // Outer bottom arm contour also gets thicker with the pump
+      const bottomArmY = lerp(395, 422, m);
+
+      const d = `
+        M -10 295
+        C 35 288, 62 ${lerp(318, 252, m)}, ${bicepLeftStartX} ${bicepLeftStartY}
+        C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, 282 326
+        C 328 258, 368 190, 362 136
+        C 356 96, 312 96, 286 122
+        C 272 136, 260 156, 248 158
+        C 240 159, 238 148, 244 134
+        C 262 88, 298 42, 332 26
+        C 352 17, 378 36, 456 94
+        C 476 110, 474 220, 452 315
+        C 434 390, 412 418, 375 422
+        C 260 ${bottomArmY}, 110 410, -10 395
+        Z
+      `;
+
+      rightArmBody.setAttribute("d", d.trim());
+
+      // Inner muscle definition line
+      const shadowD = `
+        M ${bicepLeftStartX + 12} ${bicepLeftStartY + 18}
+        C ${cp1X + 10} ${cp1Y + 24}, ${cp2X + 8} ${cp2Y + 22}, 286 344
+      `;
+      bicepContourShadow.setAttribute("d", shadowD.trim());
+
+      // Update measurement indicator dot on the bicep peak
+      const peakY = lerp(346, 248, m);
+      measureDot.setAttribute("cy", peakY.toFixed(1));
+      measureLine.setAttribute("y2", peakY.toFixed(1));
+
+      if (t >= 1) {
+        bicepMeasureIndicator.style.opacity = "0";
+        targetHeartOutline.style.opacity = "0";
+      } else {
+        bicepMeasureIndicator.style.opacity = "1";
+        targetHeartOutline.style.opacity = "1";
+      }
+    }
+
+    // =========================================================================
+    // SUBTLE TACTILE AUDIO SYNTHESIZER
+    // =========================================================================
+    let audioCtx = null;
+    function playTone(kind) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const now = audioCtx.currentTime;
+
+        if (kind === "like") {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(420, now + 0.06);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.07);
+        } else if (kind === "love") {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "triangle";
+          const base = 280 + (score / MAX_SCORE) * 240;
+          osc.frequency.setValueAtTime(base, now);
+          osc.frequency.exponentialRampToValueAtTime(base * 1.35, now + 0.11);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        } else if (kind === "complete") {
+          [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, now + i * 0.07);
+            gain.gain.setValueAtTime(0.14, now + i * 0.07);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.45);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now + i * 0.07);
+            osc.stop(now + i * 0.07 + 0.46);
+          });
+        }
+      } catch (err) {}
+    }
+
+    soundToggle.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundIconOn.style.display = soundEnabled ? "block" : "none";
+      soundIconOff.style.display = soundEnabled ? "none" : "block";
+    });
+
+    // =========================================================================
+    // FLOATING SCORE FEEDBACK
+    // =========================================================================
+    function spawnFloater(btnEl, label, isLove) {
+      const rect = btnEl.getBoundingClientRect();
+      const chip = document.createElement("div");
+      chip.className = "score-floater" + (isLove ? " love-variant" : "");
+      chip.textContent = label;
+      const offsetX = (Math.random() - 0.5) * 40;
+      chip.style.left = `${rect.left + rect.width / 2 - 28 + offsetX}px`;
+      chip.style.top = `${rect.top - 10}px`;
+      document.body.appendChild(chip);
+      setTimeout(() => chip.remove(), 750);
+    }
+
+    // =========================================================================
+    // GAME PROGRESSION & COMMENTARY
+    // =========================================================================
+    function addPoints(points, sourceBtn, isLove) {
+      const wasComplete = score >= MAX_SCORE;
+      score = Math.min(MAX_SCORE, score + points);
+      const ratio = score / MAX_SCORE;
+
+      // Update UI readouts
+      scoreValue.textContent = score;
+      progressFill.style.width = `${ratio * 100}%`;
+      progressBar.setAttribute("aria-valuenow", score);
+
+      updateBicepGeometry(ratio);
+      spawnFloater(sourceBtn, `+${points}/100`, isLove);
+
+      if (score < MAX_SCORE) {
+        playTone(isLove ? "love" : "like");
+        viewportBadge.textContent = `HEART GAP: ${100 - score}% REMAINING`;
+
+        if (points === 1) {
+          statusLabel.textContent = "MICRO-REP (+1)";
+          commentaryText.textContent = "Ghir 'Like' (+1/100)? B had sor3a khassna chher bach ykber l-bicep!";
+        } else {
+          statusLabel.textContent = "PROTEIN BOOST (+15)";
+          if (score < 45) {
+            commentaryText.textContent = "+15/100! Ha howa l-bicep bda kaytle3 s7i7...";
+          } else if (score < 85) {
+            commentaryText.textContent = "Kifach! L-qalb bda kayban wast yddiya, zidi chi 'I Love You'!";
+          } else {
+            commentaryText.textContent = "Bqa ghir chwiya w ytkmmel l-Biceps Heart 100/100!";
+          }
+        }
+      } else {
+        // Reached 100/100!
+        if (!wasComplete) {
+          playTone("complete");
+        } else {
+          playTone("love");
+        }
+        workbenchCard.classList.add("is-complete");
+        statusLabel.textContent = "BICEPS HEART: 100% LOCKED";
+        viewportBadge.textContent = "BICEPS HEART: 100 / 100 COMPLETE";
+        commentaryText.textContent = "100/100! Ha l-Biceps Heart wajd — hbeti l-te7t tqray l-message.";
+
+        if (!letterSection.classList.contains("is-visible")) {
+          letterSection.classList.add("is-visible");
+          setTimeout(() => {
+            letterSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 300);
+        }
+      }
+    }
+
+    likeBtn.addEventListener("click", () => addPoints(1, likeBtn, false));
+    loveBtn.addEventListener("click", () => addPoints(15, loveBtn, true));
+
+    resetBtn.addEventListener("click", () => {
+      score = 0;
+      scoreValue.textContent = "0";
+      progressFill.style.width = "0%";
+      progressBar.setAttribute("aria-valuenow", "0");
+      workbenchCard.classList.remove("is-complete");
+      statusLabel.textContent = "BICEP CURVATURE: DEFICIT";
+      viewportBadge.textContent = "HEART GAP: INCOMPLETE";
+      commentaryText.textContent = "Bicep is currently too flat to form the bottom-left of the heart.";
+      letterSection.classList.remove("is-visible");
+      updateBicepGeometry(0);
+    });
+
+    // Initialize
+    updateBicepGeometry(0);
+  </script>
+</body>
+</html>
